@@ -1,0 +1,6 @@
+{
+  "name": "PDF2HTML Studio",
+  "description": "Convert PDF files into HTML while preserving original layout as accurately as possible.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
