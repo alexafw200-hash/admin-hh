@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF2HTML - محول مستندات</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PDF2HTML Studio</h1>
+            <p>محول الملفات السريع والدقيق. ارفع ملفك وسيقوم السيرفر بتحويله إلى كود ويب HTML مفرد.</p>
+        </header>
+
+        <main>
+            <div class="upload-box" id="dropzone">
+                <div class="icon">📄</div>
+                <h3>اسحب وأفلت ملف الـ PDF هنا</h3>
+                <p>أو</p>
+                <button onclick="document.getElementById('fileInput').click()">اختر ملفاً من جهازك</button>
+                <input type="file" id="fileInput" accept="application/pdf" style="display: none;">
+            </div>
+
+            <div class="progress-container" id="progressContainer" style="display: none;">
+                <p id="statusText">جاري المعالجة...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <div class="result-container" id="resultContainer" style="display: none;">
+                <div class="success-icon">✅</div>
+                <h3>تم التحويل بنجاح!</h3>
+                <p>ملفك الآن جاهز للتحميل.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

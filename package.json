@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
-    "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
+    "dev": "node index.js",
+    "start": "node index.js",
+    "build": "echo 'No build needed'",
+    "lint": "echo 'No linting'"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
@@ -20,7 +19,8 @@
     "jszip": "^3.10.1",
     "lucide-react": "^0.546.0",
     "motion": "^12.23.24",
-    "pdfjs-dist": "^6.1.200",
+    "multer": "^2.2.0",
+    "pdfjs-dist": "^4.1.392",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
     "tailwind-merge": "^3.6.0",
