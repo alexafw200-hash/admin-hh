@@ -133,7 +133,17 @@ function uploadFile(file) {
             
         } else {
             progressContainer.style.display = 'none';
-            alert('حدث خطأ أثناء معالجة الملف.');
+            
+            // Try to extract server error message from blob
+            const reader = new FileReader();
+            reader.onload = function() {
+                alert(reader.result || 'حدث خطأ غير معروف أثناء معالجة الملف.');
+            };
+            if (xhr.response instanceof Blob) {
+                reader.readAsText(xhr.response);
+            } else {
+                alert('حدث خطأ أثناء معالجة الملف.');
+            }
         }
         
         // Reset file input

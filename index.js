@@ -16,15 +16,17 @@ if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
 }
 
-// Setup worker path for pdfjs in Node.js
-pdfjsLib.GlobalWorkerOptions.workerSrc = import.meta.resolve('pdfjs-dist/build/pdf.worker.mjs');
+// Setup worker path for pdfjs in Node.js using file URL
+import { pathToFileURL } from 'url';
+pdfjsLib.GlobalWorkerOptions.workerSrc = pathToFileURL(path.join(__dirname, 'node_modules', 'pdfjs-dist', 'build', 'pdf.worker.mjs')).href;
 
 const app = express();
 // 1. التوافق التام مع منصة Render وقراءة المنفذ ديناميكياً
 const PORT = process.env.PORT || 3000;
 
 // Setup multer for handling file uploads (storing temporarily)
-const upload = multer({ dest: 'uploads/' });
+// Use absolute path for multer destination
+const upload = multer({ dest: uploadDir });
 
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -193,7 +195,7 @@ app.post('/upload', upload.single('pdf'), async (req, res) => {
         
     } catch (error) {
         console.error('Error processing PDF:', error);
-        res.status(500).send('حدث خطأ أثناء معالجة الملف. الرجاء التأكد من أنه ملف PDF صالح.');
+        res.status(500).send(`حدث خطأ أثناء معالجة الملف. الرجاء التأكد من أنه ملف PDF صالح.\n\nتفاصيل الخطأ الفني (للمطور):\n${error.message}\n${error.stack}`);
         
         // Attempt to clean up file on error
         if (req.file && fs.existsSync(req.file.path)) {
